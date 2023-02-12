@@ -6,6 +6,7 @@ import { query, collection, onSnapshot, updateDoc, doc } from 'firebase/firestor
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [newItem, setNewItem] = useState('');
 
   // create Todo
   const addTodo = async (event) => {
@@ -39,7 +40,12 @@ function App() {
       <div>
         <h3>Todo App</h3>
         <form onSubmit={addTodo}>
-          <input type="text" placeholder="Add Todo" />
+          <input
+            value={newItem} 
+            onChange={(event) => setNewItem(event.target.value)} 
+            type="text" 
+            placeholder="Add Todo" 
+          />
           <button><AiOutlinePlusCircle size={30}/></button>
         </form>
         <ul>
