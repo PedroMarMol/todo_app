@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import Todo from "./components/Todo"
 import { db } from './firebase'
-import { query, collection, onSnapshot } from 'firebase/firestore'
+import { query, collection, onSnapshot, updateDoc, doc } from 'firebase/firestore'
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -22,6 +22,12 @@ function App() {
   }, [])
 
   // update todo from firebase
+  const toggleStatus = async (todo) => {
+    await updateDoc(doc(db, 'todos', todo.id), {
+      status: !todo.status
+    })
+  }
+
   // delete todo
 
   return (
@@ -34,7 +40,7 @@ function App() {
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo} />
+            <Todo key={index} todo={todo} toggleStatus={toggleStatus} />
           ))}
         </ul>
         <p>You have x-number todos</p>
