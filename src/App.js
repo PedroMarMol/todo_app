@@ -8,6 +8,10 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   // create Todo
+  const addTodo = async (event) => {
+    event.preventDefault(event)
+  } 
+
   // read todo from firebase
   useEffect(() => {
     const q = query(collection(db, 'todos'))
@@ -34,7 +38,7 @@ function App() {
     <div>
       <div>
         <h3>Todo App</h3>
-        <form>
+        <form onSubmit={addTodo}>
           <input type="text" placeholder="Add Todo" />
           <button><AiOutlinePlusCircle size={30}/></button>
         </form>
