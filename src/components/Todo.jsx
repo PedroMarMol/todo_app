@@ -6,7 +6,7 @@ const Todo = ({ todo }) => {
     <li>
         <div>
             <input type="checkbox" />
-            <p>{todo}</p>
+            <p>{todo.text}</p>
         </div>
         <button><FaRegTrashAlt /></button>
     </li>
