@@ -64,7 +64,7 @@ function App() {
             <Todo key={index} todo={todo} toggleStatus={toggleStatus} />
           ))}
         </ul>
-        <p>You have x-number todos</p>
+        <p>{`You have ${todos.length} todos`}</p>
       </div>
     </div>
   );
