@@ -2,13 +2,19 @@ import React, { useState, useEffect } from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import Todo from "./components/Todo"
 import { db } from './firebase'
-import { query, collection, onSnapshot, updateDoc, doc, addDoc } from 'firebase/firestore'
+import { 
+  query, 
+  collection, 
+  onSnapshot, 
+  doc, 
+  updateDoc, 
+  addDoc, 
+  deleteDoc, } from 'firebase/firestore'
 
 function App() {
   let defaultStatus = false;
   const [todos, setTodos] = useState([]);
   const [newItem, setNewItem] = useState('');
-  const [status, setStatus] = useState(defaultStatus);
 
   // create Todo
   const addTodo = async (event) => {
@@ -19,7 +25,7 @@ function App() {
     }
     await addDoc(collection(db, 'todos'), {
       text: newItem,
-      status: defaultStatus
+        status: defaultStatus
     })
     setNewItem('')
   };
@@ -45,6 +51,9 @@ function App() {
   }
 
   // delete todo
+  const deleteTodo = async (id) => {
+    await deleteDoc(doc(db, 'todos', id))
+  }
 
   return (
     <div>
@@ -61,7 +70,12 @@ function App() {
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo} toggleStatus={toggleStatus} />
+            <Todo 
+            key={index} 
+            todo={todo} 
+            toggleStatus={toggleStatus} 
+            deleteTodo={deleteTodo} 
+            />
           ))}
         </ul>
         {todos.length < 1 ? null : <p>{`You have ${todos.length} todos`}</p>}
