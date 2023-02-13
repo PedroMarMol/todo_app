@@ -2,16 +2,27 @@ import React, { useState, useEffect } from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import Todo from "./components/Todo"
 import { db } from './firebase'
-import { query, collection, onSnapshot, updateDoc, doc } from 'firebase/firestore'
+import { query, collection, onSnapshot, updateDoc, doc, addDoc } from 'firebase/firestore'
 
 function App() {
+  let defaultStatus = false;
   const [todos, setTodos] = useState([]);
   const [newItem, setNewItem] = useState('');
+  const [status, setStatus] = useState(defaultStatus);
 
   // create Todo
   const addTodo = async (event) => {
     event.preventDefault(event)
-  } 
+    if(newItem === '') { // change error handler
+      alert('Enter valid string')
+      return
+    }
+    await addDoc(collection(db, 'todos'), {
+      text: newItem,
+      status: defaultStatus
+    })
+    setNewItem('')
+  };
 
   // read todo from firebase
   useEffect(() => {
