@@ -14,12 +14,21 @@ const Todo = ({ todo, toggleStatus, deleteTodo }) => {
   return (
     <li className={todo.status ? style.liCompleted : style.li}>
         <div className={style.row}>
-            <input onChange={() => toggleStatus(todo)} type="checkbox" checked={todo.status ? 'checked' : ''} />
-            <p onClick={() => toggleStatus(todo)} className={todo.status ? style.textCompleted : style.text}>
+            <input 
+              onChange={() => toggleStatus(todo)} 
+              type="checkbox" 
+              checked={todo.status ? 'checked' : ''}
+            />
+            <p 
+              onClick={() => toggleStatus(todo)} 
+              className={todo.status ? style.textCompleted : style.text}
+            >
               {todo.text}
             </p>
         </div>
-        <button onClick={() => deleteTodo(todo.id)}><FaRegTrashAlt /></button>
+        <button onClick={() => deleteTodo(todo.id)}>
+          <FaRegTrashAlt />
+        </button>
     </li>
   )
 }
