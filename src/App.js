@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react"
+import Signin from "./components/Signin"
+import Signup from "./components/Signup"
+import Account from "./components/Account" 
+import { Route, Routes } from "react-router-dom"
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import Todo from "./components/Todo"
 import { db } from './firebase'
@@ -66,6 +70,11 @@ function App() {
   return (
     <div className={style.bg}>
       <div className={style.container}>
+        <Routes>
+          <Route path='/signin' element={<Signin />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/account' element={<Account />} />
+        </Routes>
         <h3 className={style.heading}>
           Todo App
         </h3>
