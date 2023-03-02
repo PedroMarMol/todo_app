@@ -8,7 +8,7 @@ const Account = (props) => {
   const userId = user.uid
   const userEmail= user.email
 
-  const useHandleLogout = async () => {
+  const HandleLogout = async () => {
     toast("You are logging out")
     try {
       await useLogOut()
@@ -25,7 +25,7 @@ const Account = (props) => {
       </h1>
       <p>User Email: {userEmail}</p>
       <p>User ID: {userId}</p>
-      <button onClick={useHandleLogout} className="border px-6 py-2 my-4">
+      <button onClick={HandleLogout} className="border px-6 py-2 my-4">
           Logout
       </button>
       <ToastContainer />
