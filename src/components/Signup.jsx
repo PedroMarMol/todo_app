@@ -9,7 +9,7 @@ export default function Signup() {
 	const navigate = useNavigate()
 	const { useCreateUser } = UserAuth()
 
-	const useHandleSubmit = async (event) => {
+	const HandleSubmit = async (event) => {
 		event.preventDefault()
 		setError('')
 		try{
@@ -29,7 +29,7 @@ export default function Signup() {
   	    <p className='py-2'>
   	      <Link to='/login' className='underline'>Sign in</Link> if you already have an account.
   	    </p>
-  	    <form onSubmit={useHandleSubmit}>
+  	    <form onSubmit={HandleSubmit}>
   	      <div className='flex flex-col'>
   	        <label className='py-2 font-medium' htmlFor='email'>Email</label>
   	        <input 
