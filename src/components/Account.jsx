@@ -1,20 +1,35 @@
 import React from "react"
+import { useUserAuth } from "../context/AuthContext"
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { UserAuth } from "../context/AuthContext"
 
 const Account = (props) => {
-  const { user, useLogOut } = UserAuth()
+  const { user, logOut } = useUserAuth()
   const userId = user.uid
   const userEmail= user.email
+  const toastStyling = 
+  {
+    position: "top-center",
+    autoClose: 1500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    }
 
-  const HandleLogout = async () => {
-    toast("You are logging out")
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  const handleLogout = async () => {
     try {
-      await useLogOut()
-      // navigate('/homepage') // maybe it is not needed
-    } catch (event) {
-      alert(event.message)
+      toast.info('You are logging out', toastStyling);
+      await delay(2000) // delays the log out function
+      await logOut()
+    } catch (error) {
+      toast(error.message)
     }
   }
   
@@ -25,10 +40,21 @@ const Account = (props) => {
       </h1>
       <p>User Email: {userEmail}</p>
       <p>User ID: {userId}</p>
-      <button onClick={HandleLogout} className="border px-6 py-2 my-4">
+      <button onClick={handleLogout} className="border px-6 py-2 my-4">
           Logout
       </button>
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   )
 };
