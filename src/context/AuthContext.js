@@ -17,36 +17,33 @@ export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState({})
 	const defaultPath = "/Signup"
 	const [path, setPath] = useState(defaultPath)
-	const [fetchingSession, setFetchingSession] = useState()
 
 
-	const useCreateUser = (email, password) => {
+	const createUser = (email, password) => {
 	  return createUserWithEmailAndPassword(auth, email, password)
 	}
 	
-	const useLogIn = (email, password) => {
+	const logIn = (email, password) => {
 		return signInWithEmailAndPassword(auth, email, password)
 	}
 
-	const useLogOut = () => {
+	const logOut = () => {
 		return signOut(auth)
 	}
 
 	useEffect(() => {
-		setFetchingSession(true)
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setUser(user)
-			setFetchingSession(false)
 		})
 			return () => unsubscribe()
 	}, [])
 	return (
-	  <UserContext.Provider value={{ useCreateUser, user, useLogOut, useLogIn, path, setPath, fetchingSession }}> 
+	  <UserContext.Provider value={{ createUser, user, logOut, logIn, path, setPath }}> 
 			{children}
 	  </UserContext.Provider>
 	)
 }
 
-export const UserAuth = () => {
+export const useUserAuth = () => {
   return useContext(UserContext)
 }
