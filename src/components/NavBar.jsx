@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineEllipsis, AiOutlineUser } from 'react-icons/ai'
 
@@ -16,11 +16,25 @@ const NavBar = () => {
     accountButton: `flex space-x-1 border border-gray-300 rounded-lg p-3 transition duration-2000 ease-in-out hover:shadow-xl`
   }
 
-  const [extend, setExtend] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const listRef = useRef(null)
   
   const handleClick = () => {
-    setExtend(!extend)
+    setIsOpen(!isOpen)
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (listRef.current && !listRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [listRef])
 
 
   return (
@@ -39,9 +53,9 @@ const NavBar = () => {
               <Link to="/list" className={style.defaultButton}>List</Link>
             </li>
             <li>
-              <button onClick={handleClick} className={style.accountButton}><AiOutlineEllipsis size={17}/><AiOutlineUser size={17}/></button>
-              {extend && 
-                <div className="absolute top-16 right-4 w-48 bg-white border rounded-lg">
+              <button onClick={() => setIsOpen(!isOpen)} className={style.accountButton}><AiOutlineEllipsis size={17}/><AiOutlineUser size={17}/></button>
+              {isOpen && 
+                <div ref={listRef} className="absolute top-16 right-4 w-48 bg-white border rounded-lg">
                   <div className=''>
                     <ul className="pt-2 pb-1 px-3">
                       <li>
