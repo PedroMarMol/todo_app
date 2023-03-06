@@ -1,23 +1,12 @@
 import React from "react"
 import { useUserAuth } from "../context/AuthContext"
-import { ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
 const Account = (props) => {
   const { user, logOut } = useUserAuth()
   const userId = user.uid
   const userEmail= user.email
-  const toastStyling = 
-  {
-    position: "top-center",
-    autoClose: 1500,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-    }
 
   function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
@@ -25,11 +14,11 @@ const Account = (props) => {
 
   const handleLogout = async () => {
     try {
-      toast.info('You are logging out', toastStyling);
-      await delay(2000) // delays the log out function
+      toast.info('You are logging out');
+      await delay(800) // delays the log out function
       await logOut()
     } catch (error) {
-      toast.warn(error.message,toastStyling)
+      toast.warn(error.message)
     }
   }
   
