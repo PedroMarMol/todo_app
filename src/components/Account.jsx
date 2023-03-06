@@ -29,7 +29,7 @@ const Account = (props) => {
       await delay(2000) // delays the log out function
       await logOut()
     } catch (error) {
-      toast(error.message)
+      toast.warn(error.message,toastStyling)
     }
   }
   
@@ -43,18 +43,6 @@ const Account = (props) => {
       <button onClick={handleLogout} className="border px-6 py-2 my-4">
           Logout
       </button>
-      <ToastContainer
-        position="top-center"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </div>
   )
 };
