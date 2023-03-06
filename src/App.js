@@ -9,6 +9,7 @@ import PublicRoute from './components/PublicRoute'
 import List from './components/List'
 import NavBar from './components/NavBar'
 import Homepage from './components/Homepage'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   const style = {
@@ -17,7 +18,7 @@ function App() {
     }
   return (
     <div className={style.bg}>
-        <NavBar />
+      <NavBar />
       <div className={style.container}>
         <AuthContextProvider>
             <Routes>
@@ -66,6 +67,18 @@ function App() {
             </Routes>  
         </AuthContextProvider>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }
