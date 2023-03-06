@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUserAuth } from '../context/AuthContext'
 import { HiOutlineMail } from 'react-icons/hi'
 import { BiLockAlt } from 'react-icons/bi'
+import { toast } from "react-toastify"
 
 const LogIn = (props) => {
   const style = {
@@ -30,15 +31,21 @@ const LogIn = (props) => {
 	const navigate = useNavigate()
 	const { logIn } = useUserAuth()
 
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
 	const useHandleSubmit = async (event) => {
 		event.preventDefault()
 		setError('')
 		try {
+      toast.info('You are logging in!')
+      await delay(800)
 			await logIn(email, password)
 			navigate('/list')
 		} catch(event) {
 			setError(event.message)
-			alert(event.message)
+			toast.warn(event.message)
 		}
 	}
 

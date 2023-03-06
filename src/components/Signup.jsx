@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUserAuth } from '../context/AuthContext'
 import { HiOutlineMail } from 'react-icons/hi'
 import { BiLockAlt } from 'react-icons/bi'
+import { toast } from 'react-toastify'
 
 export default function Signup() {
 	const style = {
@@ -29,17 +30,22 @@ export default function Signup() {
 	const navigate = useNavigate()
 	const { createUser } = useUserAuth()
 
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
 	const HandleSubmit = async (event) => {
 		event.preventDefault()
 		setError('')
 		try{
+			toast.info('You just signed up!')
+      await delay(800)
 			await createUser(email, password)
 			navigate('/list')
 		}	catch (event) {
 			setError(event.message)
-			alert(event.message)
+			toast.warn(event.message)
 		}
-
 	}
 
   return (
