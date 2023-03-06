@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserAuth } from '../context/AuthContext'
+import { useUserAuth } from '../context/AuthContext'
 import { HiOutlineMail } from 'react-icons/hi'
 import { BiLockAlt } from 'react-icons/bi'
 
@@ -27,13 +27,13 @@ export default function Signup() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 	const navigate = useNavigate()
-	const { useCreateUser } = UserAuth()
+	const { createUser } = useUserAuth()
 
 	const HandleSubmit = async (event) => {
 		event.preventDefault()
 		setError('')
 		try{
-			await useCreateUser(email, password)
+			await createUser(email, password)
 			navigate('/list')
 		}	catch (event) {
 			setError(event.message)

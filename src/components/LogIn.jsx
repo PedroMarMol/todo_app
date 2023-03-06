@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserAuth } from '../context/AuthContext'
+import { useUserAuth } from '../context/AuthContext'
 import { HiOutlineMail } from 'react-icons/hi'
 import { BiLockAlt } from 'react-icons/bi'
 
@@ -28,13 +28,13 @@ const LogIn = (props) => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 	const navigate = useNavigate()
-	const { useLogIn } = UserAuth()
+	const { logIn } = useUserAuth()
 
 	const useHandleSubmit = async (event) => {
 		event.preventDefault()
 		setError('')
 		try {
-			await useLogIn(email, password)
+			await logIn(email, password)
 			navigate('/list')
 		} catch(event) {
 			setError(event.message)

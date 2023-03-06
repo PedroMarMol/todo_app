@@ -1,9 +1,9 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { UserAuth } from '../context/AuthContext'
+import { useUserAuth } from '../context/AuthContext'
 
 const PublicRoute = ({ children }) => {
-  const { user } = UserAuth()
+  const { user } = useUserAuth()
   
   if (user) {
     return <Navigate to='/account' />

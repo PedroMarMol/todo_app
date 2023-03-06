@@ -10,7 +10,7 @@ import {
   addDoc, 
   deleteDoc, } from 'firebase/firestore'
 import ListItem from "./ListItem"
-import { UserAuth } from "../context/AuthContext"
+import { useUserAuth } from "../context/AuthContext"
 import { ImSpinner2 } from "react-icons/im"
 
 const List = (props) => {
@@ -27,12 +27,12 @@ const List = (props) => {
   let defaultStatus = false;
   const [items, setItems] = useState([])
   const [newItem, setNewItem] = useState('')
-  const { user, fetchingSession } = UserAuth()
+  const { user, fetchingSession } = useUserAuth()
   let userId = user.uid
 
   // const [user, setUser] = useState('')
   // async function fetchUser() {
-  //   const { user } = await UserAuth()
+  //   const { user } = await useUserAuth()
   // }
   
   async function fetchData() {

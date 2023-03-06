@@ -1,10 +1,10 @@
 import { React, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
-import { UserAuth } from '../context/AuthContext'
+import { useUserAuth } from '../context/AuthContext'
 import { ImSpinner2 } from 'react-icons/im'
 
 const PrivateRoute = ({ children }) => {
-  const { user } = UserAuth()
+  const { user } = useUserAuth()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
