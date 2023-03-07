@@ -17,24 +17,20 @@ const NavBar = () => {
   }
 
   const [isOpen, setIsOpen] = useState(false)
-  const listRef = useRef(null)
-  
-  const handleClick = () => {
-    setIsOpen(!isOpen)
+  const liRef = useRef()
+
+  const handleClick = (event) => {
+    if (liRef.current && !liRef.current.contains(event.target)) {
+      setIsOpen(false)
+    }
   }
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (listRef.current && !listRef.current.contains(event.target)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener('mousedown', handleClick)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener('mousedown', handleClick)
     }
-  }, [listRef])
+  }, [isOpen])
 
 
   return (
@@ -52,27 +48,30 @@ const NavBar = () => {
             <li>
               <Link to="/list" className={style.defaultButton}>List</Link>
             </li>
-            <li>
+            <li ref={liRef}>
               <button onClick={() => setIsOpen(!isOpen)} className={style.accountButton}><AiOutlineEllipsis size={17}/><AiOutlineUser size={17}/></button>
               {isOpen && 
-                <div ref={listRef} className="absolute top-16 right-4 w-48 bg-white border rounded-lg">
+                <div className="absolute top-16 right-4 w-48 bg-white border rounded-lg">
                   <div className=''>
                     <ul className="pt-2 pb-1 px-3">
                       <li>
-                        <Link to="/login" onClick={handleClick} className={style.defaultButton}>Log in</Link>
+                        <Link to="/login" className={style.defaultButton}>Log in</Link>
                       </li>
                       <li>
-                        <Link to="/signup" onClick={handleClick} className={style.defaultButton}>Sign Up</Link>
+                        <Link to="/signup" className={style.defaultButton}>Sign Up</Link>
+                      </li>
+                      <li>
+                        {/* <Link to="/" onClick={handleLogOut} className /> */}
                       </li>
                     </ul>
                   </div>
                   <div className='border-t border-gray-300'>
                     <ul className='pt-1 pb-2 px-3'>
                       <li>
-                        <Link to="/account" onClick={handleClick} className={style.defaultButton}>Account Information</Link>
+                        <Link to="/account" className={style.defaultButton}>Account Information</Link>
                       </li>
                       <li>
-                        <a href="https://www.linkedin.com/in/pedro-martos-molero-172318124/" onClick={handleClick} className={style.defaultButton}>About the creator</a>
+                        <a href="https://www.linkedin.com/in/pedro-martos-molero-172318124/" className={style.defaultButton}>About the creator</a>
                       </li>
                     </ul>
                   </div>
