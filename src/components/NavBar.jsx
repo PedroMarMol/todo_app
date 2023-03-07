@@ -1,8 +1,11 @@
 import { React, useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineEllipsis, AiOutlineUser } from 'react-icons/ai'
+import { useUserAuth } from '../context/AuthContext'
+import { toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
-const NavBar = () => {
+const NavBar = (props) => {
   const style = {
     nav: `bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 mb-5`,
     navBar: `container flex flex-wrap items-center justify-between mx-auto`,
@@ -15,12 +18,13 @@ const NavBar = () => {
     homeButton: `text-base block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page`,
     accountButton: `flex space-x-1 border border-gray-300 rounded-lg p-3 transition duration-2000 ease-in-out hover:shadow-xl`
   }
-
+  
   const [isOpen, setIsOpen] = useState(false)
-  const liRef = useRef()
+  const { user, logOut } = useUserAuth()
+  const listItemRef = useRef()
 
   const handleClick = (event) => {
-    if (liRef.current && !liRef.current.contains(event.target)) {
+    if (listItemRef.current && !listItemRef.current.contains(event.target)) {
       setIsOpen(false)
     }
   }
@@ -32,6 +36,20 @@ const NavBar = () => {
     }
   }, [isOpen])
 
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  const handleLogOut = async () => {
+    try {
+      toast.info('You are logging out');
+      await delay(800) // delays the log out function
+      await logOut()
+    } catch (error) {
+      toast.warn(error.message)
+    }
+  }
+  
 
   return (
     <nav className={style.nav}>
@@ -48,22 +66,29 @@ const NavBar = () => {
             <li>
               <Link to="/list" className={style.defaultButton}>List</Link>
             </li>
-            <li ref={liRef}>
+            <li ref={listItemRef}>
               <button onClick={() => setIsOpen(!isOpen)} className={style.accountButton}><AiOutlineEllipsis size={17}/><AiOutlineUser size={17}/></button>
               {isOpen && 
                 <div className="absolute top-16 right-4 w-48 bg-white border rounded-lg">
                   <div className=''>
-                    <ul className="pt-2 pb-1 px-3">
-                      <li>
-                        <Link to="/login" className={style.defaultButton}>Log in</Link>
-                      </li>
-                      <li>
-                        <Link to="/signup" className={style.defaultButton}>Sign Up</Link>
-                      </li>
-                      <li>
-                        {/* <Link to="/" onClick={handleLogOut} className /> */}
-                      </li>
-                    </ul>
+                    {/* show login/signup if user is undefined // show logout is defined */}
+                    { !user && 
+                      <ul className="pt-2 pb-1 px-3">
+                        <li>
+                          <Link to="/login" className={style.defaultButton}>Log in</Link>
+                        </li>
+                        <li>
+                          <Link to="/signup" className={style.defaultButton}>Sign Up</Link>
+                        </li>
+                      </ul>
+                    }
+                    { user &&
+                      <ul className="pt-2 pb-1 px-3">
+                        <li>
+                          <Link to="/" onClick={handleLogOut} className={style.defaultButton}>Log Out</Link>
+                        </li>
+                      </ul>
+                    }
                   </div>
                   <div className='border-t border-gray-300'>
                     <ul className='pt-1 pb-2 px-3'>
