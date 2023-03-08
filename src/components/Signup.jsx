@@ -5,7 +5,7 @@ import { HiOutlineMail } from 'react-icons/hi'
 import { BiLockAlt } from 'react-icons/bi'
 import { toast } from 'react-toastify'
 
-export default function Signup() {
+export default function SignUp() {
 	const style = {
 		bg: `max-w-[700px] mx-auto my-4`,
 		container: `grid place-items-center gap-4`,
