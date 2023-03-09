@@ -2,7 +2,7 @@ import { React, useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineEllipsis, AiOutlineUser } from 'react-icons/ai'
 import { useUserAuth } from '../context/AuthContext'
-import { toast } from "react-toastify"
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 const NavBar = (props) => {
@@ -12,10 +12,10 @@ const NavBar = (props) => {
     buttons: `hidden w-full md:block md:w-auto relative`,
     branding: `flex items-center`,
     logo: `h-6 mr-3 sm:h-9`,
-    name: `self-center text-xl font-semibold whitespace-nowrap dark:text-white`,
-    list: `flex flex-col items-center p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-6 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700`,
-    defaultButton: `text-base block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent`,
-    homeButton: `text-base block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page`,
+    name: `self-center text-xl font-semibold whitespace-nowrap`,
+    list: `flex flex-col items-center p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-6 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white`,
+    defaultButton: `text-base block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2F80ED] md:p-0`,
+    homeButton: `text-base block py-2 pl-3 pr-4 md:bg-transparent md:text-[#2F80ED] md:p-0 aria-current='page'`,
     accountButton: `flex space-x-1 border border-gray-300 rounded-lg p-3 transition duration-2000 ease-in-out hover:shadow-xl`
   }
   
@@ -54,38 +54,38 @@ const NavBar = (props) => {
   return (
     <nav className={style.nav}>
       <div className={style.navBar}>
-        <Link to="/" className={style.branding}>
-          <img src="https://flowbite.com/docs/images/logo.svg" className={style.logo} alt="Deja Vu Logo" />
+        <Link to='/' className={style.branding}>
+          <img src='https://flowbite.com/docs/images/logo.svg' className={style.logo} alt='Deja Vu Logo' />
           <span className={style.name}>Deja Vu</span>
         </Link>
-        <div className={style.buttons} id="navbar-default">
+        <div className={style.buttons} id='navbar-default'>
           <ul className={style.list}>
             <li>
-              <Link to="/" className={style.homeButton}>Home</Link>
+              <Link to='/' className={style.homeButton}>Home</Link>
             </li>
             <li>
-              <Link to="/list" className={style.defaultButton}>List</Link>
+              <Link to='/list' className={style.defaultButton}>List</Link>
             </li>
             <li ref={listItemRef}>
               <button onClick={() => setIsOpen(!isOpen)} className={style.accountButton}><AiOutlineEllipsis size={17}/><AiOutlineUser size={17}/></button>
               {isOpen && 
-                <div className="absolute top-16 right-4 w-48 bg-white border rounded-lg">
+                <div className='absolute top-16 right-4 w-48 bg-white border rounded-lg'>
                   <div className=''>
                     {/* show login/signup if user is undefined // show logout is defined */}
                     { !user && 
-                      <ul className="pt-2 pb-1 px-3">
+                      <ul className='pt-2 pb-1 px-3'>
                         <li>
-                          <Link to="/login" className={style.defaultButton}>Log in</Link>
+                          <Link to='/login' className={style.defaultButton}>Log in</Link>
                         </li>
                         <li>
-                          <Link to="/signup" className={style.defaultButton}>Sign Up</Link>
+                          <Link to='/signup' className={style.defaultButton}>Sign Up</Link>
                         </li>
                       </ul>
                     }
                     { user &&
-                      <ul className="pt-2 pb-1 px-3">
+                      <ul className='pt-2 pb-1 px-3'>
                         <li>
-                          <Link to="/" onClick={handleLogOut} className={style.defaultButton}>Log Out</Link>
+                          <Link to='/' onClick={handleLogOut} className={style.defaultButton}>Log Out</Link>
                         </li>
                       </ul>
                     }
@@ -93,10 +93,10 @@ const NavBar = (props) => {
                   <div className='border-t border-gray-300'>
                     <ul className='pt-1 pb-2 px-3'>
                       <li>
-                        <Link to="/account" className={style.defaultButton}>Account Information</Link>
+                        <Link to='/account' className={style.defaultButton}>Account Information</Link>
                       </li>
                       <li>
-                        <a href="https://www.linkedin.com/in/pedro-martos-molero-172318124/" className={style.defaultButton}>About the creator</a>
+                        <a href='https://www.linkedin.com/in/pedro-martos-molero-172318124/' className={style.defaultButton}>About the creator</a>
                       </li>
                     </ul>
                   </div>
