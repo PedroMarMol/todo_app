@@ -21,50 +21,50 @@ function App() {
       <AuthContextProvider>
         <NavBar />
         <div className={style.container}>
-              <Routes>
-                <Route
-                  exact path='/'
-                  element={
-                    <Homepage />
-                  }
-                />
-                <Route 
-                  path='/login' 
-                  element={
-                    <PublicRoute>
-                      <LogIn />
-                    </PublicRoute>}
-                />
-                <Route 
-                  path='/signup' 
-                  element={
-                    <PublicRoute>
-                      <SignUp />
-                    </PublicRoute>}
-                />
-                <Route 
-                  path='/account'
-                  element={
-                    <PrivateRoute>
-                      <Account />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path='/list'
-                  element={
-                    <PrivateRoute>
-                      <List />
-                    </PrivateRoute>}
-                />
-                <Route
-                  path='*'
-                  element={
-                    <PrivateRoute>
-                      <Homepage />
-                    </PrivateRoute>}
-                />
-              </Routes>  
+          <Routes>
+            <Route
+              exact path='/'
+              element={
+                <Homepage />
+              }
+            />
+            <Route 
+              path='/login' 
+              element={
+                <PublicRoute>
+                  <LogIn />
+                </PublicRoute>}
+            />
+            <Route 
+              path='/signup' 
+              element={
+                <PublicRoute>
+                  <SignUp />
+                </PublicRoute>}
+            />
+            <Route 
+              path='/account'
+              element={
+                <PrivateRoute>
+                  <Account />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/list'
+              element={
+                <PrivateRoute>
+                  <List />
+                </PrivateRoute>}
+            />
+            <Route
+              path='*'
+              element={
+                <PrivateRoute>
+                  <Homepage />
+                </PrivateRoute>}
+            />
+          </Routes>  
         </div>
       </AuthContextProvider>
       <ToastContainer

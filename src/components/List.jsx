@@ -20,7 +20,7 @@ const List = (props) => {
   heading: `text-3xl font-bold text-center text-gray-800 p-2`,
   form: `flex justify-between`,
   input: `border p-2 w-full text-xl`,
-  button: `border p-4 ml-2 bg-purple-500 text-slate-100`,
+  button: `border p-4 ml-2 bg-[#2F80ED] text-slate-100`,
   count: `text-center p-2`,
   }
 
@@ -88,7 +88,7 @@ const List = (props) => {
   return (
     <div>
       <h3 className={style.heading}>
-        Todo App
+        To-Dos
       </h3>
       <form 
         onSubmit={addItem} 
@@ -99,7 +99,7 @@ const List = (props) => {
           className={style.input}
           onChange={(event) => setNewItem(event.target.value)} 
           type="text" 
-          placeholder="Add Todo" 
+          placeholder="Add To-Do" 
         />
         <button className={style.button}>
           <AiOutlinePlusCircle size={30}/>
@@ -118,7 +118,7 @@ const List = (props) => {
       {items.length < 1 ? 
         null : 
         <p className={style.count}>
-          {`You have ${items.length} todos`}
+          {`You have ${items.length} To-Dos`}
         </p>
       }
     </div>
