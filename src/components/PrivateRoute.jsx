@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useUserAuth } from '../context/AuthContext'
-import { toast } from "react-toastify"
-import { PulseLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
+import LoadingIndicator from './LoadingIndicator'
 
 const PrivateRoute = ({ children }) => {
   const { user } = useUserAuth()
@@ -28,12 +28,13 @@ const PrivateRoute = ({ children }) => {
 
   return (
     <div >
-      {isLoading ? (<div className='flex justify-center'><PulseLoader color="#2F80ED" /></div>)
-      : ( user ? children : <Navigate to='/signup' />)}
+      {
+          isLoading ? <LoadingIndicator />
+        : !user ? <Navigate to='/signup' />
+        : children 
+      }
     </div>
   )
-
-
 }
 
 export default PrivateRoute
