@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const NavBar = (props) => {
   const style = {
-    nav: `bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 mb-5`,
+    nav: `bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded mb-5`,
     navBar: `container flex flex-wrap items-center justify-between mx-auto`,
     buttons: `hidden w-full md:block md:w-auto relative`,
     branding: `flex items-center`,
