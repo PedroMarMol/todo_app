@@ -6,17 +6,10 @@ import { BiLockAlt } from 'react-icons/bi'
 import { toast } from 'react-toastify'
 import useInputVisibility from '../hooks/useInputVisibility'
 import handleFirebaseError from '../utils/handleFirebaseError'
+import addDelay from '../utils/addDelay'
+import { style } from '../utils/styles'
 
-export default function SignUp() {
-	const style = {
-		bg: `max-w-[700px] mx-auto my-4`,
-		container: `grid place-items-center gap-4`,
-		header: `text-2xl font-bold py-2`,
-		form: `grid place-items-center gap-4`,
-		formContainer: `flex items-baseline`,
-		inputContainer: `relative mb-3 xl:w-96 data-te-input-wrapper-init`,
-		button: `text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
-	}
+function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 	const navigate = useNavigate()
@@ -24,15 +17,11 @@ export default function SignUp() {
   const isEmailFilled = useInputVisibility('inputEmail')
   const isPasswordFilled = useInputVisibility('inputPassword')
 
-  function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-  }
-
 	const handleSubmit = async (event) => {
 		event.preventDefault()
 		toast.info('You just signed up!')
 		try {
-      await delay(1000)
+      await addDelay(1000)
 			await createUser(email, password)
 			navigate('/list')
 		}	catch (error) {
@@ -90,3 +79,5 @@ export default function SignUp() {
   	</div>
   )
 }
+
+export default SignUp
