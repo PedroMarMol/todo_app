@@ -12,8 +12,8 @@ const Account = (props) => {
     button: `text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`,
   }
   const { user, logOut } = useUserAuth()
-  const userId = user.uid
   const userEmail= user.email
+  const userId = user.uid
 
   function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
@@ -35,6 +35,8 @@ const Account = (props) => {
       <div className={style.info}>
         <p className={style.subheader}>User Email</p>
         {userEmail}
+        <p className={style.subheader}>User ID</p>
+        {userId}
       </div>
       <div>
         <button onClick={handleLogout} className={style.button}>
