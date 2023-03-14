@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import { AiOutlinePlusCircle } from "react-icons/ai"
+import { ImSpinner2 } from "react-icons/im"
 import { db } from '../firebase'
 import { 
   query, 
@@ -9,9 +10,9 @@ import {
   updateDoc, 
   addDoc, 
   deleteDoc, } from 'firebase/firestore'
-import ListItem from "./ListItem"
-import { useUserAuth } from "../context/AuthContext"
-import { ImSpinner2 } from "react-icons/im"
+  import { useUserAuth } from "../context/AuthContext"
+  import { toast } from "react-toastify"
+  import ListItem from "./ListItem"
 
 const List = (props) => {
   const style = {
@@ -29,16 +30,8 @@ const List = (props) => {
   const [newItem, setNewItem] = useState('')
   const { user, fetchingSession } = useUserAuth()
   let userId = user.uid
-
-  // const [user, setUser] = useState('')
-  // async function fetchUser() {
-  //   const { user } = await useUserAuth()
-  // }
   
   async function fetchData() {
-    // if (fetchingSession) {
-    //   return <ImSpinner2 size={30}/>
-    // } else {
       const q = await query(collection(db, userId))
       onSnapshot(q, (querySnapshot) => {
         let itemsArr = []
@@ -60,7 +53,7 @@ const List = (props) => {
   async function addItem(event) {
     event.preventDefault(event)
     if(newItem === '') { // change error handler
-      alert('Enter valid string')
+      toast.warn('Enter valid string')
       return
     }
     await addDoc(collection(db, userId), {

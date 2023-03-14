@@ -1,8 +1,8 @@
-import React from "react"
-import { useUserAuth } from "../context/AuthContext"
-import { toast } from "react-toastify"
+import React from 'react'
+import { useUserAuth } from '../context/AuthContext'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { style } from "../utils/styles"
+import { style } from '../utils/styles'
 
 const Account = (props) => {
   const { user, logOut } = useUserAuth()
@@ -24,7 +24,7 @@ const Account = (props) => {
   }
   
   return (
-    <div className="text-center">
+    <div className='text-center'>
       <h1 className={style.header}>Account Details</h1>
       <div className={style.info}>
         <p className={style.subheader}>User Email</p>

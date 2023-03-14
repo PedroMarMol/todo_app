@@ -7,5 +7,10 @@ export const style = {
   info: `mb-2`,
   subheader: `text-xl font-semibold`,
   inputContainer: `relative mb-3 xl:w-96 data-te-input-wrapper-init`,
-  button: `text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`
+  button: `text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl dark font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2`,
+  li: `flex justify-between bg-slate-200 p-4 my-2 capitalize`,
+  liCompleted: `flex justify-between bg-slate-400 p-4 my-2 capitalize`,
+  row: `flex`,
+  text: `ml-2 cursor-pointer`,
+  textCompleted: `ml-2 cursor-pointer line-through`,
 }

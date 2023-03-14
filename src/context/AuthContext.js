@@ -2,20 +2,20 @@ import {
 	createContext, 
 	useContext, 
 	useEffect, 
-	useState } from "react"
+	useState } from 'react'
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut, 
-  onAuthStateChanged } from "firebase/auth"
-import { auth } from "../firebase"
+  onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../firebase'
 
 
 const UserContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState({})
-	const defaultPath = "/Signup"
+	const defaultPath = '/Signup'
 	const [path, setPath] = useState(defaultPath)
 
 
@@ -38,7 +38,7 @@ export const AuthContextProvider = ({ children }) => {
 			return () => unsubscribe()
 	}, [])
 	return (
-	  <UserContext.Provider value={{ createUser, user, logOut, logIn, path, setPath }}> 
+	  <UserContext.Provider value={{ user, createUser, logOut, logIn, path, setPath }}> 
 			{children}
 	  </UserContext.Provider>
 	)
