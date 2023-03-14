@@ -20,4 +20,4 @@ The technologies I have used are:
 
 - React-icons for adding some icons like the NavBar ones or the 'add list item' one, this library allows you to import only the icons that you are using, so it is really lightweight aswell.
 
-- Some utils I made to make reusable code were two functions, addDelay (which sets a timeout promise) and an handleFirebaseError which handles firebase errors.
+- Some utils I made to make reusable code were two functions, addDelay (sets a timeout promise) and handleFirebaseError (handles firebase errors).
