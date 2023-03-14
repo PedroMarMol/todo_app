@@ -12,6 +12,7 @@ import {
 import ListItem from "./ListItem"
 import { useUserAuth } from "../context/AuthContext"
 import { ImSpinner2 } from "react-icons/im"
+import { toast } from "react-toastify"
 
 const List = (props) => {
   const style = {
@@ -29,16 +30,8 @@ const List = (props) => {
   const [newItem, setNewItem] = useState('')
   const { user, fetchingSession } = useUserAuth()
   let userId = user.uid
-
-  // const [user, setUser] = useState('')
-  // async function fetchUser() {
-  //   const { user } = await useUserAuth()
-  // }
   
   async function fetchData() {
-    // if (fetchingSession) {
-    //   return <ImSpinner2 size={30}/>
-    // } else {
       const q = await query(collection(db, userId))
       onSnapshot(q, (querySnapshot) => {
         let itemsArr = []
@@ -60,7 +53,7 @@ const List = (props) => {
   async function addItem(event) {
     event.preventDefault(event)
     if(newItem === '') { // change error handler
-      alert('Enter valid string')
+      toast.warn('Enter valid string')
       return
     }
     await addDoc(collection(db, userId), {
