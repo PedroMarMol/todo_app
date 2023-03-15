@@ -9,11 +9,12 @@ const NavBar = (props) => {
   const style = {
     nav: `bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded mb-5`,
     navBar: `container flex flex-wrap items-center justify-between mx-auto`,
-    buttons: `hidden w-full md:block md:w-auto relative`,
+    buttons: `w-full md:w-auto relative`,
     branding: `flex items-center`,
     logo: `h-6 mr-3 sm:h-9`,
     name: `self-center text-xl font-semibold whitespace-nowrap`,
-    list: `flex flex-col items-center p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-6 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white`,
+    list: `flex items-center space-x-6 md:space-x-8 md:text-sm md:font-medium w-full md:w-auto`,
+    listSm: `p-2 mt-2 md:p-0 md:mt-0`,
     defaultButton: `text-base block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2F80ED] md:p-0`,
     homeButton: `text-base block py-2 pl-3 pr-4 md:bg-transparent md:text-[#2F80ED] md:p-0 aria-current='page'`,
     accountButton: `flex space-x-1 border border-gray-300 rounded-lg p-3 transition duration-2000 ease-in-out hover:shadow-xl`
@@ -59,7 +60,7 @@ const NavBar = (props) => {
           <span className={style.name}>Deja Vu</span>
         </Link>
         <div className={style.buttons} id='navbar-default'>
-          <ul className={style.list}>
+        <ul className={`${style.list} ${style.listSm}`}>
             <li>
               <Link to='/' className={style.homeButton}>Home</Link>
             </li>
